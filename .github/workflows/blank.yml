@@ -28,11 +28,11 @@ jobs:
       PROJECT_ID: 'grand-thought-365806'
     steps:
       - name: Set up gcloud Cloud SDK environment
-        uses: google-github-actions/setup-gcloud@v0.6.0
+        uses: 'google-github-actions/auth@v0'
         with:
           service_account_key: '$ {{ secrets.SERVICE_ACCOUNT_KEY }}'
           project_id: 'grand-thought-365806'
-          install_components: gcloud
+          install_components: 'gcloud'
           export_default_credentials: true
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v0'
