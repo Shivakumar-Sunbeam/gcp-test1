@@ -24,11 +24,12 @@ jobs:
   LB_REBASE_US_WEST:
     runs-on: ubuntu-latest
     if: contains(inputs.switch_to_region, 'us-west')
+    env:
+      PROJECT_ID: 'grand-thought-365806'
     steps:
       - name: Set up gcloud Cloud SDK environment
         uses: google-github-actions/setup-gcloud@v0.6.0
         with:
-          service_account_email: 'jenkins-gke-dr-test@grand-thought-365806.iam.gserviceaccount.com'
           service_account_key: '$ {{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
           project_id: 'grand-thought-365806'
           install_components: gcloud
