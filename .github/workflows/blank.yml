@@ -34,6 +34,7 @@ jobs:
           project_id: 'grand-thought-365806'
           install_components: 'gcloud'
           export_default_credentials: true
+          credentials_json: '$ {{ secrets.SERVICE_ACCOUNT_KEY }}'
           credentials_file_path: $RUNNER_TEMP
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v0'
