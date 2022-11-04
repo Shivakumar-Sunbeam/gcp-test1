@@ -30,12 +30,8 @@ jobs:
       - name: Set up gcloud Cloud SDK environment
         uses: 'google-github-actions/auth@v0'
         with:
-          service_account_key: '$ {{ secrets.SERVICE_ACCOUNT_KEY }}'
-          project_id: 'grand-thought-365806'
-          install_components: 'gcloud'
-          export_default_credentials: true
-          credentials_json: '$ {{ secrets.SERVICE_ACCOUNT_KEY }}'
-          credentials_file_path: $RUNNER_TEMP
+          workload_identity_provider: 'projects/13793097680/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+          service_account: 'jenkins-gke-dr-test@grand-thought-365806.iam.gserviceaccount.com'
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v0'
       - name: 'Use gcloud CLI'
