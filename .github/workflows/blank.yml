@@ -25,13 +25,18 @@ jobs:
     runs-on: ubuntu-latest
     if: contains(inputs.switch_to_region, 'us-west')
     steps:
-      - uses: actions-hub/gcloud@master
-        env:
-          PROJECT_ID: 'grand-thought-365806'
-          APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      - name: Set up gcloud Cloud SDK environment
+        uses: google-github-actions/setup-gcloud@v0.6.0
         with:
-          args: cp your-file.txt gs://your-bucket/
-          cli: gcloud
-      - name: run sample command
-        run: gcloud compute instances list
+          service_account_email: 'jenkins-gke-dr-test@grand-thought-365806.iam.gserviceaccount.com'
+          service_account_key: '$ {{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
+          project_id: 'grand-thought-365806'
+          install_components: gcloud
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v0'
+      - name: 'Use gcloud CLI'
+        run: |
+          gcloud info
+          gcloud version
+          gcloud conpute instances list
   
