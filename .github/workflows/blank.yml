@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: DR
+name: Trigger-DR
 
 # Controls when the workflow will run
 on:
@@ -21,7 +21,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  LB_REBASE_US_WEST:
+  DB_PROMOTION_US_WEST:
     permissions:
       contents: 'read'
       id-token: 'write'
@@ -29,7 +29,6 @@ jobs:
     if: contains(inputs.switch_to_region, 'us-west')
     env:
       PROJECT_ID: 'grand-thought-365806'
- 
     steps:
       - name: Set up gcloud Cloud SDK environment
         uses: 'google-github-actions/auth@v0'
@@ -42,5 +41,70 @@ jobs:
         run: |
           gcloud info
           gcloud version
-          gcloud conpute instances list
-  
+          gcloud sql instances promote-replica geodb --quiet
+  DB_PROMOTION_US_EAST:
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    runs-on: ubuntu-latest
+    if: contains(inputs.switch_to_region, 'us-east')
+    env:
+      PROJECT_ID: 'grand-thought-365806'
+    steps:
+      - name: Set up gcloud Cloud SDK environment
+        uses: 'google-github-actions/auth@v0'
+        with:
+          workload_identity_provider: 'projects/13793097680/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+          service_account: 'jenkins-gke-dr-test@grand-thought-365806.iam.gserviceaccount.com'
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v0'
+      - name: 'Use gcloud CLI'
+        run: |
+          gcloud info
+          gcloud version
+          gcloud sql instances promote-replica geodb-replica --quiet
+  LB_REBASE_US_EAST:
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    runs-on: ubuntu-latest
+    if: contains(inputs.switch_to_region, 'us-east')
+    env:
+      PROJECT_ID: 'grand-thought-365806'
+    steps:
+      - name: Set up gcloud Cloud SDK environment
+        uses: 'google-github-actions/auth@v0'
+        with:
+          workload_identity_provider: 'projects/13793097680/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+          service_account: 'jenkins-gke-dr-test@grand-thought-365806.iam.gserviceaccount.com'
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v0'
+      - name: 'Use gcloud CLI'
+        run: |
+          gcloud info
+          gcloud version
+          gcloud compute url-maps set-default-service --default-service=thd-dev-backend-svc1 thd-dev-url-map
+        # gcloud compute url-maps set-default-service --default-service=thd-dev-neg1-internal thd-dev-url-map-internal
+  LB_REBASE_US_WEST:
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    runs-on: ubuntu-latest
+    if: contains(inputs.switch_to_region, 'us-west')
+    env:
+      PROJECT_ID: 'grand-thought-365806'
+    steps:
+      - name: Set up gcloud Cloud SDK environment
+        uses: 'google-github-actions/auth@v0'
+        with:
+          workload_identity_provider: 'projects/13793097680/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+          service_account: 'jenkins-gke-dr-test@grand-thought-365806.iam.gserviceaccount.com'
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v0'
+      - name: 'Use gcloud CLI'
+        run: |
+          gcloud info
+          gcloud version
+          gcloud compute url-maps set-default-service --default-service=thd-dev-backend-svc2 thd-dev-url-map
+        # gcloud compute url-maps set-default-service --default-service=thd-dev-neg2-internal thd-dev-url-map-internal
+    
