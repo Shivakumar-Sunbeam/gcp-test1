@@ -23,7 +23,7 @@ jobs:
   # This workflow contains a single job called "build"
   LB_REBASE_US_WEST:
     runs-on: ubuntu-latest
-    if: contains(input.switch_to_region, "us-west")
+    if: contains(inputs.switch_to_region, "us-west")
     steps:
       - uses: actions-hub/gcloud@master
         env:
