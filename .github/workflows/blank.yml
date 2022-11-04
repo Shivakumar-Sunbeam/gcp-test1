@@ -12,7 +12,7 @@ on:
     inputs:
       switch_to_region:
         type: choice
-        description: provide ur choice
+        description: Select the region you would like to switch To
         options: 
         - us-west
         - us-east
