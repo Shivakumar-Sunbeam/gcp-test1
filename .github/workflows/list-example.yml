@@ -8,21 +8,21 @@ on:
 env:
       PROJECT_ID: 'grand-thought-365806'
       
-      geodb_us-east: geodb
-      notifydb_us-east: notifydb
-      securitydb-dr_us-east: securitydb-dr
-      serviceproviderdb-dr_us-east: serviceproviderdb-dr
-      tresurydb-dr_us-east: tresurydb-dr
-      workorderdb-dr_us-east: workorderdb-dr
-      servicecatalogdb-dr_us-east: servicecatalogdb-dr
+      geodb-us-east: geodb
+      notifydb-us-east: notifydb
+      securitydb-dr-us-east: securitydb-dr
+      serviceproviderdb-dr-us-east: serviceproviderdb-dr
+      tresurydb-dr-us-east: tresurydb-dr
+      workorderdb-dr-us-east: workorderdb-dr
+      servicecatalogdb-dr-us-east: servicecatalogdb-dr
       
-      geodb_us-west: geodb-replica
-      notifydb_us-west: notifydb-replica
-      securitydb-dr_us-west: securitydb-dr-replica
-      serviceproviderdb-dr_us-west: serviceproviderdb-dr-replica
-      tresurydb-dr_us-west: tresurydb-dr-replica
-      workorderdb-dr_us-west: workorderdb-dr-replica
-      servicecatalogdb-dr_us-west: servicecatalogdb-dr-replica
+      geodb-us-west: geodb-replica
+      notifydb-us-west: notifydb-replica
+      securitydb-dr-us-west: securitydb-dr-replica
+      serviceproviderdb-dr-us-west: serviceproviderdb-dr-replica
+      tresurydb-dr-us-west: tresurydb-dr-replica
+      workorderdb-dr-us-west: workorderdb-dr-replica
+      servicecatalogdb-dr-us-west: servicecatalogdb-dr-replica
       
 jobs:
   use_env:
@@ -30,5 +30,5 @@ jobs:
     steps:
       - name: "use env"
         run: |
-          echo Hello $geodb_us-west
-          echo Hello $servicecatalogdb-dr_us-east
+          echo 'Hello $geodb-us-west'
+          echo 'Hello $servicecatalogdb-dr-us-east'
