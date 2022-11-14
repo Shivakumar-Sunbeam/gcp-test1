@@ -1,28 +1,40 @@
-# This is a basic workflow to help you get started with Actions
-
-name: list-example
+name: Cleanup_And_Restore
 
 # Controls when the workflow will run
 on:
   workflow_dispatch:
+    inputs:
+      switch_to_region:
+        type: choice
+        description: provide ur choice
+        options: 
+        - us-west
+        - us-east
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo {{ names }}
-        with:
-          names: |
-                'Shivkumar'
-                'Megha'
-
+env:
+      PROJECT_ID: 'grand-thought-365806'
       
+      geodb_us-east: geodb
+      notifydb_us-east: notifydb
+      securitydb-dr_us-east: securitydb-dr
+      serviceproviderdb-dr_us-east: serviceproviderdb-dr
+      tresurydb-dr_us-east: tresurydb-dr
+      workorderdb-dr_us-east: workorderdb-dr
+      servicecatalogdb-dr_us-east: servicecatalogdb-dr
+      
+      geodb_us-west: geodb-replica
+      notifydb_us-west: notifydb-replica
+      securitydb-dr_us-west: securitydb-dr-replica
+      serviceproviderdb-dr_us-west: serviceproviderdb-dr-replica
+      tresurydb-dr_us-west: tresurydb-dr-replica
+      workorderdb-dr_us-west: workorderdb-dr-replica
+      servicecatalogdb-dr_us-west: servicecatalogdb-dr-replica
+      
+jobs:
+  use_env:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "use env"
+        run: |
+          echo $geodb_us-west
+          echo $servicecatalogdb-dr_us-east
