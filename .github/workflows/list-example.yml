@@ -19,10 +19,10 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, {{ names }}
-        env:
+        run: echo {{ names }}
+        with:
           names: |
-                "Shivkumar"
-                "Megha"
+                'Shivkumar'
+                'Megha'
 
       
