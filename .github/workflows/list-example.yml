@@ -3,13 +3,7 @@ name: Cleanup_And_Restore
 # Controls when the workflow will run
 on:
   workflow_dispatch:
-    inputs:
-      switch_to_region:
-        type: choice
-        description: provide ur choice
-        options: 
-        - us-west
-        - us-east
+
 
 env:
       PROJECT_ID: 'grand-thought-365806'
