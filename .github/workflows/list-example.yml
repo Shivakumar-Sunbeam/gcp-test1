@@ -5,7 +5,11 @@ on:
   workflow_dispatch:
 
 
-env:
+
+      
+jobs:
+  use_env:
+    env:
       PROJECT_ID: 'grand-thought-365806'
       
       geodb-us-east: geodb
@@ -23,12 +27,9 @@ env:
       tresurydb-dr-us-west: tresurydb-dr-replica
       workorderdb-dr-us-west: workorderdb-dr-replica
       servicecatalogdb-dr-us-west: servicecatalogdb-dr-replica
-      
-jobs:
-  use_env:
     runs-on: ubuntu-latest
     steps:
       - name: "use env"
         run: |
-          echo 'Hello ${{ geodb-us-east }}'
-          echo 'Hello ${{ geodb-us-west }}'
+          echo Hello $geodb-us-east
+          echo Hello $geodb-us-west
