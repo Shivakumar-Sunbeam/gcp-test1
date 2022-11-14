@@ -12,7 +12,7 @@ jobs:
     env:
       PROJECT_ID: 'grand-thought-365806'
       
-      geodb-us-east: geodb
+      geodb_us_east: geodb
       notifydb-us-east: notifydb
       securitydb-dr-us-east: securitydb-dr
       serviceproviderdb-dr-us-east: serviceproviderdb-dr
@@ -22,7 +22,7 @@ jobs:
       
       geodb-us-west: geodb-replica
       notifydb-us-west: notifydb-replica
-      securitydb-dr-us-west: securitydb-dr-replica
+      securitydb_dr_us_west: securitydb-dr-replica
       serviceproviderdb-dr-us-west: serviceproviderdb-dr-replica
       tresurydb-dr-us-west: tresurydb-dr-replica
       workorderdb-dr-us-west: workorderdb-dr-replica
@@ -31,5 +31,5 @@ jobs:
     steps:
       - name: "use env"
         run: |
-          echo Hello $geodb-us-east
-          echo Hello $geodb-us-west
+          echo "Hello ${{env.geodb_us_east}}"
+          echo Hello $securitydb_dr_us_west
