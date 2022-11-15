@@ -15,27 +15,15 @@ on:
       
 jobs:
   use_env:
-    env:
-      PROJECT_ID: 'grand-thought-365806'
-      test: 
-      geodb_us_east: geodb
-      notifydb-us-east: notifydb
-      securitydb-dr-us-east: securitydb-dr
-      serviceproviderdb-dr-us-east: serviceproviderdb-dr
-      tresurydb-dr-us-east: tresurydb-dr
-      workorderdb-dr-us-east: workorderdb-dr
-      servicecatalogdb-dr-us-east: servicecatalogdb-dr
-      
-      geodb-us-west: geodb-replica
-      notifydb-us-west: notifydb-replica
-      securitydb_dr_us_west: securitydb-dr-replica
-      serviceproviderdb-dr-us-west: serviceproviderdb-dr-replica
-      tresurydb-dr-us-west: tresurydb-dr-replica
-      workorderdb-dr-us-west: workorderdb-dr-replica
-      servicecatalogdb-dr-us-west: servicecatalogdb-dr-replica
     runs-on: ubuntu-latest
     steps:
       - name: "use env"
         run: |
-          echo "Hello ${{env.geodb_us_east}}"
-          echo Hello ${{ github.event.inputs.test }}
+          if [ ${{ github.event.inputs.test }} ]
+          then
+            echo "you selecte true"
+          else
+            echo "you selected false"
+          fi
+          
+
