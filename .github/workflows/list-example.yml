@@ -17,7 +17,7 @@ jobs:
   use_env:
     env:
       PROJECT_ID: 'grand-thought-365806'
-      
+      test: 
       geodb_us_east: geodb
       notifydb-us-east: notifydb
       securitydb-dr-us-east: securitydb-dr
@@ -38,4 +38,4 @@ jobs:
       - name: "use env"
         run: |
           echo "Hello ${{env.geodb_us_east}}"
-          echo Hello $inputs.test
+          echo Hello ${{ github.event.inputs.test }}
