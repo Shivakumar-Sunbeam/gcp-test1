@@ -3,7 +3,13 @@ name: Cleanup_And_Restore
 # Controls when the workflow will run
 on:
   workflow_dispatch:
-
+    inputs:
+      test:
+        type: choice
+        description: test
+        options:
+          - yes
+          - no
 
 
       
@@ -32,4 +38,4 @@ jobs:
       - name: "use env"
         run: |
           echo "Hello ${{env.geodb_us_east}}"
-          echo Hello $securitydb_dr_us_west
+          echo Hello $inputs.test
